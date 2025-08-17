@@ -1,0 +1,69 @@
+header {
+  background-color: var(--secondary-bg);
+  color: var(--primary-text);
+}
+
+.model_fixed {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(17, 17, 17, 0.8);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  z-index: 200;
+}
+
+.model_fixed ul.model {
+  animation: mymove 0.7s 1;
+  width: 90%;
+  max-width: 600px;
+  border-radius: 1.5rem;
+  padding: 1.5rem 2rem;
+  background-color: #111;
+  color: white;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+  margin-top: 4rem;
+}
+
+body.light .model_fixed ul.model {
+  background-color: var(--primary-bg);
+  color: var(--primary-text);
+  box-shadow: 0 0 20px rgba(238, 234, 234, 0.5);
+}
+
+.model_fixed ul.model li {
+  border-bottom: 1px solid #333;
+  padding: 0.8rem 0;
+  font-weight: 500;
+}
+
+.model_fixed ul.model li:first-child {
+  display: flex;
+  justify-content: flex-end;
+  border-bottom: none;
+  padding: 0;
+  margin-bottom: 1rem;
+}
+
+.model_fixed ul.model li:last-child {
+  border-bottom: none;
+}
+
+.model_fixed ul.model li a {
+  font-size: 1rem;
+  display: block;
+  transition: color 0.2s;
+}
+
+.icon-clear {
+  font-size: 1.3rem;
+  color: #aaa;
+  cursor: pointer;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.icon-clear:hover {
+  color: crimson;
+  transform: rotate(180deg) scale(1.2);
+}

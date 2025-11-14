@@ -22,7 +22,7 @@ const books = [
 
 export default function FeaturedBooks() {
   return (
-    <section id="featured-books" className="   flex justify-center !pb-5"  >
+    <section id="featured" className="   flex justify-center !pb-5"  >
       <div className="max-w-7xl w-full text-center px-6 sm:px-10 " style={{marginTop:'50px'}}>
        <div style={{ marginBottom: "4rem" }}>
   <div

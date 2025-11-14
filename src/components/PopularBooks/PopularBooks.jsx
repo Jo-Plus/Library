@@ -150,7 +150,7 @@ export default function Main() {
   const categories = ["all", "Romatic", "Popular", "Adventure"];
 
   return (
-    <section id="projects" className="!py-20 bg-[var(--primary-bg)] !text-[var(--primary-text)]">
+    <section id="popular" className="!py-20 bg-[var(--primary-bg)] !text-[var(--primary-text)]">
       <div className="container mx-auto px-4 text-center !pb-10 border-b border-gray-300">
         <div className="flex-col justify-center items-center">
           <p className="font-light opacity-60 second-font !mb-5 uppercase !text-[var(--primary-text)]">Some quality items</p>

@@ -1,22 +1,28 @@
-import React from 'react'
-import './App.css'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import LandingPage from './components/LandingPage/LandingPage.jsx'
-import Login from './components/Login/Login.jsx'
-import Register from './components/Register/Register.jsx'
-import Notfound from './components/Notfound/Notfound.jsx'
+import React from "react";
+import "./App.css";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import LandingPage from "./components/LandingPage/LandingPage.jsx";
+import Login from "./components/Login/Login.jsx";
+import Register from "./components/Register/Register.jsx";
+import Notfound from "./components/Notfound/Notfound.jsx";
+import UserContextProvider from "../context/UserContext.jsx";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute.jsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <LandingPage />,
+    element: (
+      <ProtectedRoute>
+        <LandingPage />
+      </ProtectedRoute>
+    ),
   },
   {
-    path: "/Login",
+    path: "/login",
     element: <Login />,
   },
   {
-    path: "/Register",
+    path: "/register",
     element: <Register />,
   },
   {
@@ -26,10 +32,11 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-
   return (
-    <RouterProvider router={router} />
-  )
+    <UserContextProvider>
+      <RouterProvider router={router} />
+    </UserContextProvider>
+  );
 }
 
-export default App
+export default App;

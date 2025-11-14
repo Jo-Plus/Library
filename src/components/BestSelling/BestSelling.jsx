@@ -8,8 +8,8 @@ import { FaArrowRight } from "react-icons/fa6";
 export default function BestSelling() {
   return (
     <div className="bg-[var(--second-bg)] !pt-[80px] !pb-[80px] relative overflow-hidden !text-[var(--primary-text)]">
-      <img src={leaf} alt="leaf" className="absolute bottom-0 left-[-50px] !z-10 hidden md:block"/>
-      <img src={pattern2} alt="pattern2" className="absolute top-[-200px] right-[-200px] !z-10 hidden md:block"/>
+      <img src={leaf} alt="leaf" className="absolute bottom-0 left-[-50px] !z-10 !opacity-10 xl:!opacity-100"/>
+      <img src={pattern2} alt="pattern2" className="absolute top-[-200px] right-[-200px] !z-10 "/>
       <div className="relative !z-20 container flex justify-center items-center gap-5 xl:gap-20 flex-wrap">
         <img src={singleImage} alt="single-image" width={400} />
         <div>

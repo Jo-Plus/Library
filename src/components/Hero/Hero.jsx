@@ -53,7 +53,6 @@ export default function Carousel() {
         color: "var(--primary-text)",
       }}
     >
-      {/* النص اللي على الشمال */}
       <div
         className="carousel-content md:w-1/2 text-center md:text-left px-8 md:pl-20 md:pr-0"
         style={{ paddingLeft: "1.4rem" }}
@@ -109,7 +108,6 @@ export default function Carousel() {
         </a>
       </div>
 
-      {/* السلايدر */}
       <div className="md:w-1/2 w-full">
         <Swiper
           className="w-[95%] pt-[4.125rem] rounded-lg"

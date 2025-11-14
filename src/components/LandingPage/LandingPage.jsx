@@ -8,6 +8,7 @@ import ContactUs from '../ContactUs/ContactUs.jsx';
 import Footer from '../Footer/Footer.jsx'
 import Hero from '../Hero/Hero.jsx'
 import FeaturedBooks from '../FeaturedBooks/FeaturedBooks.jsx'
+import BooksOffer from '../BooksOffer/BooksOffer.jsx'
 
 export default function LandingPage() {
   return (<>
@@ -17,6 +18,7 @@ export default function LandingPage() {
   <FeaturedBooks/>
   <BestSelling/>
   <PopularBooks/>
+  <BooksOffer/>
   <DownloadPage/>
   <ContactUs/>
   <Footer/>

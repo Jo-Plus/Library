@@ -1,17 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect , useContext } from "react";
 import { RiMenu3Line } from "react-icons/ri";
 import { FaRegMoon } from "react-icons/fa";
 import { FiSun } from "react-icons/fi";
 import { RxExit } from "react-icons/rx";
 import './Navbar.css';
-import { NavLink } from "react-router-dom";
+import { NavLink , useNavigate } from "react-router-dom";
+import { UserContext } from '../../../context/UserContext.jsx';
 
 function Navbar() {
+  const navigate = useNavigate();
   const [theme, setTheme] = useState(localStorage.getItem("currentMode") ?? "light");
   const [showModel, setShowModel] = useState(false);
   const [scroll, setScroll] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState(true);
+  const { userLogin, setUserLogin } = useContext(UserContext);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -38,12 +41,17 @@ function Navbar() {
     localStorage.setItem("currentMode", theme);
   }, [theme]);
 
+  const handleLogout = () => {
+    localStorage.removeItem("userToken");
+    setUserLogin(false);
+    setShowModel(false);
+    navigate("/login");
+  };
+
   return (
     <>
       <header
-        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-          scroll ? "backdrop-blur-lg bg-[rgba(0,0,0,0.3)]" : "bg-transparent"
-        } shadow-md px-2 !py-2 !pt-4`}
+        className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${scroll ? "backdrop-blur-lg bg-[rgba(0,0,0,0.3)]" : "bg-transparent"} shadow-md px-2 !py-2 !pt-4`}
         style={{
           top: isVisible ? "0" : "-80px",
           color: "var(--primary-text)",
@@ -52,22 +60,32 @@ function Navbar() {
       >
         <div className="container mx-auto flex justify-between items-center">
           <img src="/logo.png" alt="Logo" width={130} className="cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}/>
-          <ul className="hidden xl:flex gap-5 font-[400px] text-[16px] uppercase second-font">
-            <li><a href="#feature">Feature</a></li>
-            <li><a href="#howItWork">How Works</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contactUs">Contact Us</a></li>
-          </ul>
+          
+          {userLogin && 
+            <ul className="hidden lg:flex gap-5 font-[400px] text-[16px] uppercase second-font">
+              <li><a href="#featured">Featured</a></li>
+              <li><a href="#popular">Popular</a></li>
+              <li><a href="#cart">Cart</a></li>
+              <li><a href="#contactUs">Contact Us</a></li>
+            </ul>
+          }
+
           <div className="flex gap-[20px] justify-center items-center transition duration-300 ease-in-out">
-                <NavLink className="!py-3 !px-12 border-2 border-[var(--primary-text)] rounded-full hidden md:inline-block text-xs font-bold uppercase transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg" to='/login'>Login</NavLink>
-                <NavLink className="!p-3 !px-10 text-[var(--primary-text)] rounded-full hidden md:inline-block text-xs font-bold uppercase transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg" to='/register'>Register</NavLink>
-            <RiMenu3Line onClick={() => setShowModel(true)} size={24} className="xl:hidden cursor-pointer" />
+            {!userLogin ? (
+              <>
+                <NavLink className="!py-3 !px-12 border-2 border-[var(--primary-text)] rounded-full hidden lg:inline-block text-xs font-bold uppercase transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg" to='/login'>Login</NavLink>
+                <NavLink className="!p-3 !px-10 text-[var(--primary-text)] rounded-full hidden lg:inline-block text-xs font-bold uppercase transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg" to='/register'>Register</NavLink>
+              </>
+            ) : (
+              <button onClick={handleLogout} className="!py-3 !px-12 border-2 border-[var(--primary-text)] rounded-full hidden lg:inline-block text-xs font-bold uppercase transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg">
+                Logout
+              </button>
+            )}
+
+            <RiMenu3Line onClick={() => setShowModel(true)} size={24} className="lg:hidden cursor-pointer" />
+
             <button
-              onClick={() => {
-                const newTheme = theme === "dark" ? "light" : "dark";
-                localStorage.setItem("currentMode", newTheme);
-                setTheme(newTheme);
-              }}
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               className="mode flex"
             >
               {theme === "light" ? <FaRegMoon size={24} /> : <FiSun size={24} />}
@@ -79,17 +97,23 @@ function Navbar() {
       {showModel && (
         <div className="model_fixed">
           <ul className='model uppercase font-[400px] text-[16px]'>
-            <li><RxExit className="icon-clear" onClick={() => {setShowModel(false)}} /></li>
-            <li><a href="#feature" onClick={() => {setShowModel(false)}} className="font-medium">Feature</a></li>
-            <li><a href="#howItWork" onClick={() => {setShowModel(false)}} className="font-medium">How Works</a></li>
-            <li><a href="#about" onClick={() => {setShowModel(false)}} className="font-medium">ِAbout</a></li>
-            <li><a href="#contactUs" onClick={() => {setShowModel(false)}} className="font-medium">Contact Us</a></li>
-              <div className="flex gap-6 justify-center items-center !mt-3">
-                <NavLink className="!py-3 !px-12 border-2 border-[var(--primary-text)] rounded-full text-xs font-bold uppercase" to='/login'>Login</NavLink>
-                <NavLink className="!p-3 !px-10 text-[var(--primary-text)] linear-button rounded-full text-xs font-bold uppercase" to='/register'>Register</NavLink>
-              </div>
+            <li><RxExit className="icon-clear" onClick={() => setShowModel(false)} /></li>
+            {userLogin ? (
+              <>
+                <li><a href="#featured" onClick={() => setShowModel(false)} className="font-medium">Featured</a></li>
+                <li><a href="#popular" onClick={() => setShowModel(false)} className="font-medium">Popular</a></li>
+                <li><a href="#cart" onClick={() => setShowModel(false)} className="font-medium">Cart</a></li>
+                <li><a href="#contactUs" onClick={() => setShowModel(false)} className="font-medium">Contact Us</a></li>
+                <li><button onClick={handleLogout} className="!py-3 !px-12 border-2 border-[var(--primary-text)] rounded-full text-xs font-bold uppercase mt-3 w-full">Logout</button></li>
+              </>
+            ) : (
+              <>
+                <li><NavLink className="!py-3 !px-12 border-2 border-[var(--primary-text)] rounded-full text-xs font-bold uppercase mt-3 block text-center" to='/login'>Login</NavLink></li>
+                <li><NavLink className="!p-3 !px-10 border-2 text-[var(--primary-text)] linear-button rounded-full text-xs font-bold uppercase mt-2 block text-center" to='/register'>Register</NavLink></li>
+              </>
+            )}
           </ul>
-      </div>
+        </div>
       )}
     </>
   );

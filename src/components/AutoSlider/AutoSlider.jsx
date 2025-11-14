@@ -17,7 +17,7 @@ const AutoSlider = () => {
   const duplicatedLogos = [...logos, ...logos];
 
   return (
-    <div id="feature" className="py-8 md:py-12 bg-[var(--second-bg)]">
+    <div id="feature" className="!py-8 !md:py-12 bg-[var(--second-bg)]">
       <div className="container">
         <div className="relative overflow-hidden">
           <div className="absolute inset-y-0 left-0 w-20 bg-gradient-to-r from-[var(--second-bg)] to-transparent z-10"></div>
@@ -37,7 +37,7 @@ const AutoSlider = () => {
         </div>
       </div>
 
-      <style jsx global>{`
+      <style>{`
         @keyframes infinite-scroll {
           0% {
             transform: translateX(0);

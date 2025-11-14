@@ -52,7 +52,7 @@ function Navbar() {
       >
         <div className="container mx-auto flex justify-between items-center">
           <img src="/logo.png" alt="Logo" width={130} className="cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}/>
-          <ul className="hidden lg:flex gap-5 font-[400px] text-[16px] uppercase second-font">
+          <ul className="hidden xl:flex gap-5 font-[400px] text-[16px] uppercase second-font">
             <li><a href="#feature">Feature</a></li>
             <li><a href="#howItWork">How Works</a></li>
             <li><a href="#about">About</a></li>
@@ -61,7 +61,7 @@ function Navbar() {
           <div className="flex gap-[20px] justify-center items-center transition duration-300 ease-in-out">
                 <NavLink className="!py-3 !px-12 border-2 border-[var(--primary-text)] rounded-full hidden md:inline-block text-xs font-bold uppercase transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg" to='/login'>Login</NavLink>
                 <NavLink className="!p-3 !px-10 text-[var(--primary-text)] rounded-full hidden md:inline-block text-xs font-bold uppercase transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-lg" to='/register'>Register</NavLink>
-            <RiMenu3Line onClick={() => setShowModel(true)} size={24} className="lg:hidden cursor-pointer" />
+            <RiMenu3Line onClick={() => setShowModel(true)} size={24} className="xl:hidden cursor-pointer" />
             <button
               onClick={() => {
                 const newTheme = theme === "dark" ? "light" : "dark";

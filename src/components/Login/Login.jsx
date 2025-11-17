@@ -11,7 +11,7 @@ export default function Login() {
   const navigate = useNavigate();
   let {setUserLogin} = useContext(UserContext); 
   const [apiError, setApiError] = useState("");
-  const [ setIsLoading] = useState(false);
+  const [ isLoading , setIsLoading] = useState(false);
 
 function handleLogin(values) {
   setIsLoading(true);
@@ -140,3 +140,4 @@ function handleLogin(values) {
     </>
   );
 }
+

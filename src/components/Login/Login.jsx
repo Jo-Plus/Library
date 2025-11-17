@@ -61,7 +61,7 @@ function handleLogin(values) {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="!w-[90%] !sm:w-[60%] !md:w-[40%] !lg:w-[30%] !bg-white !border !border-neutral-300 !rounded-2xl !shadow-xl !p-8 !container"
+          className="!w-[90%] sm:!w-[60%] md:!w-[50%] lg:!w-[40%] !bg-white !border !border-neutral-300 !rounded-2xl !shadow-xl !p-8 !container"
         >
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
@@ -140,5 +140,6 @@ function handleLogin(values) {
     </>
   );
 }
+
 
 

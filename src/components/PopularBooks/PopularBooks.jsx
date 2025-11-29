@@ -137,11 +137,9 @@ export default function Main() {
     if (item === "all") setFiltered(projectsData);
     else setFiltered(projectsData.filter((p) => p.category === item));
   };
-  
   const handleCardClick = (book) => {
     setSelectedBook(book);
   };
-  
   const handleCloseModal = () => {
     setSelectedBook(null);
   };
@@ -149,46 +147,48 @@ export default function Main() {
   const categories = ["all", "Romatic", "Popular", "Adventure"];
 
   return (
-    <section id="popular" className="!py-20 bg-[var(--primary-bg)] !text-[var(--primary-text)]">
-      <div className="container mx-auto px-4 text-center !pb-10 border-b border-gray-300">
-        <div className="flex-col justify-center items-center">
-          <p className="font-light opacity-60 second-font !mb-5 uppercase !text-[var(--primary-text)]">Some quality items</p>
-          <div className="flex items-center justify-center w-full !my-10 gap-5">
-            <div className="flex-grow h-[1px] bg-gray-300"></div>
-            <h2 className=" text-4xl md:text-6xl font-normal !text-[var(--primary-text)] px-6"> Popular Books </h2>
-            <div className="flex-grow h-[1px] bg-gray-300"></div>
-          </div>
-        </div>
+<section id="popular" className="!py-20 bg-[var(--primary-bg)] !text-[var(--primary-text)]">
+  <div className="container mx-auto px-4 text-center !pb-10 border-b border-gray-300">
+    <div className="flex-col justify-center items-center">
+      <p className="font-light opacity-60 second-font !mb-5 uppercase !text-[var(--primary-text)]"> Some quality items </p>
+      <div className="flex items-center justify-center w-full !my-10 gap-5">
+        <div className="flex-grow h-[1px] bg-gray-300"></div>
+        <h2 className="text-4xl md:text-6xl font-normal !text-[var(--primary-text)] px-6"> Popular Books </h2>
+        <div className="flex-grow h-[1px] bg-gray-300"></div>
+      </div>
+    </div>
 
-        <div className="flex flex-wrap justify-center items-center !gap-10 !mb-12">
-          {categories.map((item) => (
-            <button key={item} onClick={() => handleFilter(item)} className={`px-5 py-2 text-sm font-normal relative transition-all duration-300 !text-[var(--primary-text)] ${activeCategory === item ? "after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-[var(--second-text)] font-semibold text-black" : ""}`} > {item === "all" ? "All Books" : item === "Romatic" ? "Romantic" : item === "Popular" ? "Popular" : item.charAt(0).toUpperCase() + item.slice(1)} </button> ))}
-        </div>
+    <div className="flex flex-wrap justify-center items-center !gap-10 !mb-12">
+      {categories.map((item) => (
+        <button key={item} onClick={() => handleFilter(item)} className={`px-5 py-2 text-sm font-normal relative transition-all duration-300 !text-[var(--primary-text)] ${ activeCategory === item ? "after:absolute after:-bottom-1 after:left-0 after:w-full after:h-[2px] after:bg-[var(--second-text)] font-semibold text-black" : "" }`} >
+          {item === "all" ? "All Books" : item === "Romatic" ? "Romantic" : item === "Popular" ? "Popular" : item.charAt(0).toUpperCase() + item.slice(1)}
+        </button>
+      ))}
+    </div>
 
-        <AnimatePresence>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 !justify-center items-center">
-            {filtered.map((item) => (
-             <motion.div key={item.id} layout initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 40 }} transition={{ duration: 0.4, type: "spring", damping: 10 }} onClick={() => handleCardClick(item)} className="rounded-lg overflow-hidden w-full cursor-pointer hover:shadow-xl transition-all duration-300 relative">
-  {item.price2 && item.offer && ( <div className="absolute top-3 left-3 bg-red-600 text-white !px-3 !py-1 text-xs font-bold rounded-md shadow-lg z-10"> {item.offer} OFF </div> )}
-  <div className="w-full h-80 flex items-center justify-center py-10 mb-7 bg-[var(--second-bg)] rounded-lg">
-    <img src={item.img} alt={item.title} className="max-w-full max-h-full object-contain" />
+    <AnimatePresence>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6 !justify-center items-center">
+        {filtered.map((item) => (
+          <motion.div key={item.id} layout initial={{ opacity: 0, y: 40 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 40 }} transition={{ duration: 0.4, type: "spring", damping: 10 }} onClick={() => handleCardClick(item)} className="rounded-lg overflow-hidden w-full cursor-pointer hover:shadow-xl transition-all duration-300" >
+            {item.price2 && item.offer && ( <div className="absolute top-3 left-3 bg-red-600 text-white !px-3 !py-1 text-xs font-bold rounded-md shadow-lg z-10"> {item.offer} OFF </div> )}
+            <div className="w-full h-80 flex items-center justify-center !py-10 !mb-7 bg-[var(--second-bg)]">
+              <img src={item.img} alt={item.title} className="max-w-full max-h-full object-contain" />
+            </div>
+            <div className="py-3 flex flex-col items-center">
+              <h3 className="text-xl font-normal !text-[var(--primary-text)] !mb-2">{item.title}</h3>
+              <p className="text-sm !text-[var(--primary-text)] opacity-50 !mb-2">{item.author}</p>
+              <span className="text-base font-light !text-[var(--price)]"> {item.price2 ? item.price2 : item.price} </span>
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </AnimatePresence>
+
+    <AnimatePresence>
+      {selectedBook && <BookDetailsModal book={selectedBook} onClose={handleCloseModal} />}
+    </AnimatePresence>
   </div>
-  <div className="py-3 flex flex-col items-center">
-    <h3 className="text-xl font-normal text-[var(--primary-text)] mb-2"> {item.title} </h3>
-    <p className="text-sm text-[var(--primary-text)] opacity-50 mb-2"> {item.author} </p>
-    <div className="flex items-center gap-3">
-      <span className="text-lg font-bold text-[var(--price)]"> {item.price2 ? item.price2 : item.price} </span>
-      {item.price2 && ( <span className="text-[var(--price)] opacity-50  line-through text-base"> {item.price} </span> )}
-    </div>
+</section>
 
-  </div></motion.div> ))}
-
-    </div>
-      </AnimatePresence>
-      <AnimatePresence>
-        {selectedBook && ( <BookDetailsModal  book={selectedBook}  onClose={handleCloseModal}  />)}
-      </AnimatePresence>
-    </div>
-  </section>
   );
 }

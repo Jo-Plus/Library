@@ -97,7 +97,7 @@ function Navbar() {
                    <HashLink smooth to="/" onClick={() => setShowModel(false)} > Home </HashLink>
                 </li>
                 <li>
-                  <HashLink smooth to="/#favorites" onClick={() => setShowModel(false)} > Favorites </HashLink>
+                  <HashLink smooth to="/favorites" onClick={() => setShowModel(false)} > Favorites </HashLink>
                 </li>
                 <li>
                   <HashLink smooth to="/#contact" onClick={() => setShowModel(false)} > Contact Us </HashLink>

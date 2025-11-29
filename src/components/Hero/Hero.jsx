@@ -128,7 +128,7 @@ export default function Carousel() {
           </a>
         </div>
 
-        <div className="md:w-1/2 w-full">
+        <div className="md:!w-1/2 !w-full lg:!w-[42%]">
           <Swiper
             className="w-[95%] pt-[4.125rem] rounded-lg"
             modules={[Pagination, EffectCoverflow, Autoplay]}
